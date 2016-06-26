@@ -1,15 +1,43 @@
 <div class="left-panel">
+    <h1>Layers</h1>
     <div id="layer-list">
+        <div dragula="'layers'">
+            <div class="layerObj" ng-repeat="layer in ec.layers">
+                <div class="preview">
+                    <img ng-src="layer.image" />
+                </div>
+                <div class="details">
+                    {{layer.name}}
+                </div>
+                <div class="delete" ng-click=""></div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="right-panel">
     <div>
-        <form>
-            <input type="text" />
+        <form name="layerUpload">
+            <fieldset>
+                <legend>Add New Layer</legend>
+
+                <label>Layer Name</label><br>
+                <input type="text" placeholder="Name" ng-model="ec.name" required /><br>
+                <br>
+                <label>Image</label><br>
+                <input type="file" ngf-select ng-model="imageFile" name="file" accept="image/*" required /><br>
+                <br>
+                <img ng-show="layerUpload.file.$valid" ngf-thumbnail="imageFile"
+                                                          height="60"/><br>
+                <button ng-disabled="!layerUpload.$valid"
+                        ng-click="ec.uploadImage(imageFile)">Add Layer</button>
+            </fieldset>
         </form>    
     </div>
     <div>
-    
+        {{layerUpload | json}}
+    </div>
+    <div>
+        {{imageFile}}
     </div>
 </div>
 

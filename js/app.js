@@ -18,4 +18,4 @@ angular
 ;
 
 require('./controllers');
-
+require('./services');

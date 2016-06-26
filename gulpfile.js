@@ -32,7 +32,7 @@ gulp.task('browserify', function(){
 });
 
 gulp.task('moveJson', function(){
-    gulp.src('./js/menu.json')
+    gulp.src('./js/layers.json')
     .pipe(gulp.dest('./public'))
 });
 

@@ -8,7 +8,7 @@ appConfig.$inject = [
 ]
 
 function appConfig($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/')
+    $urlRouterProvider.otherwise('/edit')
     $stateProvider
         .state('menu',{
             url: '/',
