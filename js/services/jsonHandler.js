@@ -8,7 +8,8 @@ jsonHandler.$inject = [
 
 function jsonHandler($http){
     var service = {
-        menu: generateMenu
+        menu: generateMenu,
+        save: save
     }
 
     return service;
@@ -22,5 +23,19 @@ function jsonHandler($http){
             console.log(response);
         });
     }
+    
+    function save(data, success, failure){
+        if(typeof success === 'undefined')
+            success = function(){};
+        if(typeof failure === 'undefined')
+            failure = function(){};
 
+        var script = 'scripts/sort.php'
+        $http.post(script, data)
+            .then(function(data){
+                success();   
+            },function(data){
+                failure();
+            });
+    }
 }

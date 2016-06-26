@@ -1,10 +1,10 @@
 <div class="left-panel">
     <h1>Layers</h1>
     <div id="layer-list">
-        <div dragula="'layers'">
+        <div dragula="'layers'" dragula-model="ec.layers">
             <div class="layerObj" ng-repeat="layer in ec.layers">
                 <div class="preview">
-                    <img ng-src="layer.image" />
+                    <img ng-src="{{layer.image}}" width="60" />
                 </div>
                 <div class="details">
                     {{layer.name}}
@@ -33,11 +33,7 @@
             </fieldset>
         </form>    
     </div>
-    <div>
-        {{layerUpload | json}}
-    </div>
-    <div>
-        {{imageFile}}
-    </div>
+
+    <button ng-click="ec.save()">Save</button>
 </div>
 
