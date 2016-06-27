@@ -3,11 +3,19 @@ module.exports = menuController;
 
 menuController.$inject = [
     '$scope',
-    'jsonHandler'
+    'jsonHandler',
+    '$interval'
 ]
 
-function menuController($scope, jsonHandler){
+function menuController($scope, jsonHandler, $interval){
     var vm = this;
+
+    $interval(function(){
+        jsonHandler.menu().then(function(data){
+            vm.json = data;
+            console.log('yiff!');
+        });
+    },180000);
 
     $scope.$on('$viewContentLoaded', function(){
         jsonHandler.menu().then(function(data){
