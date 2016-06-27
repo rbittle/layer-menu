@@ -3,7 +3,7 @@
 module.exports = jsonHandler;
 
 jsonHandler.$inject = [
-    '$http'   
+    '$http'
 ]
 
 function jsonHandler($http){
@@ -18,6 +18,7 @@ function jsonHandler($http){
 
     function generateMenu(){
         return $http.get('layers.json').then(function(response){
+            console.log(response);
             return response.data;
         }, function(response){
             console.log(response);
@@ -29,13 +30,13 @@ function jsonHandler($http){
             success = function(){};
         if(typeof failure === 'undefined')
             failure = function(){};
-
+        console.log(data);
         var script = 'scripts/sort.php'
         $http.post(script, data)
-            .then(function(data){
-                success();   
-            },function(data){
-                failure();
+            .then(function(res){
+                success(res);   
+            },function(res){
+                failure(res);
             });
     }
 }

@@ -1,1 +1,6 @@
-test
+<div class="container">
+    <div class="layer" style="z-index:{{mc.json.layers.indexOf(layer)}};" ng-repeat="layer in mc.json.layers">
+        <img ng-src="{{layer.image}}" />
+    </div>
+    <div class="marquee"><span>{{mc.json.marquee}}</span></div>
+</div>

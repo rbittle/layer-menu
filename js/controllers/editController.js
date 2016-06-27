@@ -11,53 +11,49 @@ editController.$inject = [
 
 function editController($scope, jsonHandler, dragulaService, Upload){
     var vm = this;
+    vm.json = {};
+    vm.json.layers = [];
 
-    dragulaService.options($scope, 'layers',{
-        
-    });
-    
     vm.uploadImage = function(file){
 
-        console.log('uploading...')
         file.upload = Upload.upload({
             url: '/layermenu/scripts/upload.php',
             file: file,
             method: 'POST',
             data: {targetPath: 'uploads/'},
         });
-        console.log(file);
         file.upload.then(function(resp){
-            vm.layers.push({name:vm.name, image: 'scripts/uploads/'+file.name});
+            if(vm.json.layers == []||typeof vm.json.layers === 'undefined'){
+                vm.json.layers = [{name:vm.name, image: 'scripts/uploads/'+file.name}]
+            }else{
+                vm.json.layers.push({name:vm.name, image: 'scripts/uploads/'+file.name});
+            }
         },function(resp){
         
         });
     }
+    
+    vm.delete = function(item){
+        var index = vm.json.layers.indexOf(item);
+        vm.json.layers.splice(index, 1);
+    }
 
     vm.save = function(){
         var data = {
-            layers: vm.layers,
-            marquee: vm.marquee
+            layers: vm.json.layers,
+            marquee: vm.json.marquee
         }
-
-        jsonHandler.save(data, function(data){
+        jsonHandler.save(data, function(res){
             console.log('save success');
-            console.log(data);
-        }, function(data){
+        }, function(res){
             console.log('save failure');
-            console.log(data);
         });
     }
 
-    $scope.$on('layers.drop', function(e, el){
-        console.log(vm.layers);
-    });
-
     $scope.$on('$viewContentLoaded', function(){
         jsonHandler.menu().then(function(data){
-            vm.layers = data;
-            console.log(data);
+            vm.json = data;
         });
-
-   });
+    });
 }
 

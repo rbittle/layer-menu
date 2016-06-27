@@ -1,23 +1,26 @@
-[
-    {
-        "name":"1",
-        "image":""
-    },
-    {
-        "name":"2",
-        "image":""
-    },
-    {
-        "name":"3",
-        "image":""
-    },
-    {
-        "name":"4",
-        "image":""
-    },
-    {
-        "name":"5",
-        "image":""
-    }
+{
+    "layers":[
+        {
+            "name":"1",
+            "image":""
+        },
+        {
+            "name":"2",
+            "image":""
+        },
+        {
+            "name":"3",
+            "image":""
+        },
+        {
+            "name":"4",
+            "image":""
+        },
+        {
+            "name":"5",
+            "image":""
+        }
 
-]
+    ],
+    "marquee":""
+}
