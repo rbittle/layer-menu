@@ -31,6 +31,9 @@
                                                           height="60"/><br>
                 <button ng-disabled="!layerUpload.$valid"
                         ng-click="ec.uploadImage(imageFile)">Add Layer</button>
+                <span ng-show="imageFile.progress>=0">
+                    <div ng-bind="'Progress: ' + picFile.progress + '%'"></div>
+                </span>
             </fieldset>
         </form>    
     </div>
@@ -38,7 +41,7 @@
         <form name="marqueeSet">
             <fieldset>
                 <legend>Marquee Text</legend>
-                <input type="text" ng-model="ec.json.marquee" rows="3" cols="80" required><br>
+                <input type="text" ng-model="ec.json.marquee" rows="3" cols="80"><br>
             </fieldset>
         </form>
     </div>
