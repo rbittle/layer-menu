@@ -13,7 +13,6 @@ function menuController($scope, jsonHandler, $interval){
     $interval(function(){
         jsonHandler.menu().then(function(data){
             vm.json = data;
-            console.log('yiff!');
         });
     },180000);
 

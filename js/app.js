@@ -14,7 +14,7 @@ angular
         'oc.lazyLoad'
     ])
     .config(require('./config'))
-    .run(require('./debug'))
+//    .run(require('./debug'))
 ;
 
 require('./controllers');

@@ -17,7 +17,7 @@ function jsonHandler($http){
     /*-----------*/
 
     function generateMenu(){
-        return $http.get('layers.json', {cache:false}).then(function(response){
+        return $http({url:'layers.json', method:'GET', params:{nocache:1}}).then(function(response){
             console.log(response);
             return response.data;
         }, function(response){
