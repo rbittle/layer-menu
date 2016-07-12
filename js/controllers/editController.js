@@ -17,7 +17,7 @@ function editController($scope, jsonHandler, dragulaService, Upload){
     vm.uploadImage = function(file){
 
         file.upload = Upload.upload({
-            url: 'scripts/upload.php',
+            url: '/layermenu/scripts/upload.php',
             file: file,
             method: 'POST',
             data: {targetPath: 'uploads/'},

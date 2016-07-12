@@ -31,7 +31,8 @@ function jsonHandler($http){
         if(typeof failure === 'undefined')
             failure = function(){};
         console.log(data);
-        var script = 'scripts/sort.php'
+        var script = '/scripts/sort.php'
+
         $http.post(script, data)
             .then(function(res){
                 success(res);   

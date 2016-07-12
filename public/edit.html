@@ -41,7 +41,10 @@
         <form name="marqueeSet">
             <fieldset>
                 <legend>Marquee Text</legend>
+                <label>Text:</label>
                 <input type="text" ng-model="ec.json.marquee" rows="3" cols="80"><br>
+                <label>Color:</label>
+                <input colorpicker="rgba" type="text" ng-model="ec.json.color" />
             </fieldset>
         </form>
     </div>

@@ -36,7 +36,8 @@ function appConfig($stateProvider, $urlRouterProvider){
                     return $ocLazyLoad.load({
                         insertBefore: '#ng_lazyload_link',
                         files: [
-                            'css/edit.css'
+                            'css/edit.css',
+                            'css/colorpicker.min.css'
                         ]
                     });
                 }]
