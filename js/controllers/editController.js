@@ -6,18 +6,20 @@ editController.$inject = [
     '$scope',
     'jsonHandler',
     'dragulaService',
-    'Upload'
+    'Upload',
+    '$timeout'
 ]
 
-function editController($scope, jsonHandler, dragulaService, Upload){
+function editController($scope, jsonHandler, dragulaService, Upload, $timeout){
     var vm = this;
     vm.json = {};
     vm.json.layers = [];
+    vm.saved = false;
 
     vm.uploadImage = function(file){
 
         file.upload = Upload.upload({
-            url: '/layermenu/scripts/upload.php',
+            url: 'scripts/upload.php',
             file: file,
             method: 'POST',
             data: {targetPath: 'uploads/'},
@@ -41,10 +43,13 @@ function editController($scope, jsonHandler, dragulaService, Upload){
     vm.save = function(){
         var data = {
             layers: vm.json.layers,
-            marquee: vm.json.marquee
+            marquee: vm.json.marquee,
+            color: vm.json.color
         }
         jsonHandler.save(data, function(res){
             console.log('save success');
+            vm.saved = true;
+            $timeout(function(){vm.saved=false;},1000);
         }, function(res){
             console.log('save failure');
         });
