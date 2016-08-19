@@ -2,5 +2,7 @@
     <div class="layer" style="z-index:{{mc.json.layers.indexOf(layer)}};" ng-repeat="layer in mc.json.layers">
         <img ng-src="{{layer.image}}" height="1080" width="1920" />
     </div>
-    <div class="marquee" ng-show="mc.json.marquee" ng-style="{'color':mc.json.color}"><span>{{mc.json.marquee}}</span></div>
+    <div class="marquee" ng-show="mc.json.marquee"ng-style="{'color':mc.json.color,}">
+        <span ng-style="{'animation':'marquee '+mc.json.time+'s linear infinite'}">{{mc.json.marquee}}</span>
+    </div>
 </div>

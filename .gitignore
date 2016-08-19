@@ -1,5 +1,9 @@
 # Debug files
 debug
+# Layer Image Files
+public/images
+
+
 # Map Files
 *.map
 
@@ -21,3 +25,6 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# vim SWP files
+*.swp

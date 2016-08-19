@@ -15,24 +15,25 @@ function editController($scope, jsonHandler, dragulaService, Upload, $timeout){
     vm.json = {};
     vm.json.layers = [];
     vm.saved = false;
+    var socket = io();
 
     vm.uploadImage = function(file){
 
-        file.upload = Upload.upload({
-            url: 'scripts/upload.php',
+        var uploadPost = Upload.upload({
+            url: 'upload/',
             file: file,
-            method: 'POST',
-            data: {targetPath: 'uploads/'},
+            method: 'POST'
         });
-        file.upload.then(function(resp){
+        uploadPost.then(function(resp){
             if(vm.json.layers == []||typeof vm.json.layers === 'undefined'){
-                vm.json.layers = [{name:vm.name, image: 'scripts/uploads/'+file.name}]
+                vm.json.layers = [{name:vm.name, image: 'images/'+file.name}]
             }else{
-                vm.json.layers.push({name:vm.name, image: 'scripts/uploads/'+file.name});
+                vm.json.layers.push({name:vm.name, image: 'images/'+file.name});
             }
         },function(resp){
         
         });
+        
     }
     
     vm.delete = function(item){
@@ -44,7 +45,8 @@ function editController($scope, jsonHandler, dragulaService, Upload, $timeout){
         var data = {
             layers: vm.json.layers,
             marquee: vm.json.marquee,
-            color: vm.json.color
+            color: vm.json.color,
+            time: vm.json.time
         }
         jsonHandler.save(data, function(res){
             console.log('save success');
@@ -53,6 +55,7 @@ function editController($scope, jsonHandler, dragulaService, Upload, $timeout){
         }, function(res){
             console.log('save failure');
         });
+        socket.emit('menuSend', vm.json);
     }
 
     $scope.$on('$viewContentLoaded', function(){

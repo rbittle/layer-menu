@@ -20,7 +20,8 @@ function appConfig($stateProvider, $urlRouterProvider){
                     return $ocLazyLoad.load({
                         insertBefore: '#ng_lazyload_link',
                         files: [
-                            'css/menu.css'
+                            'css/menu.css',
+                            'socket.io/socket.io.js'
                         ]
                     });
                 }]
@@ -37,7 +38,8 @@ function appConfig($stateProvider, $urlRouterProvider){
                         insertBefore: '#ng_lazyload_link',
                         files: [
                             'css/edit.css',
-                            'css/colorpicker.min.css'
+                            'css/colorpicker.min.css',
+                            'socket.io/socket.io.js'
                         ]
                     });
                 }]

@@ -17,7 +17,7 @@ function jsonHandler($http){
     /*-----------*/
 
     function generateMenu(){
-        return $http({url:'layers.json?nocache=1', method:'GET', params:{nocache:1}}).then(function(response){
+        return $http({url:'menuJson/', method:'GET'}).then(function(response){
             console.log(response);
             return response.data;
         }, function(response){
@@ -31,7 +31,7 @@ function jsonHandler($http){
         if(typeof failure === 'undefined')
             failure = function(){};
         console.log(data);
-        var script = 'scripts/sort.php'
+        var script = 'menuJson/'
 
         $http.post(script, data)
             .then(function(res){
