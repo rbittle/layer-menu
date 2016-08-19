@@ -34,6 +34,20 @@ app.post('/upload', function(req, res){
     res.end('Upload Completed.');
 });
 
+app.post('/delete', function(req, res){
+    var file = req.body.fileName;
+
+    
+
+    try{
+        fs.unlink(__dirname + '/public/images/' + file);
+        res.end('File Deleted');
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
+});
+
 app.get('/menuJson', function(req, res){
     res.sendFile(__dirname + '/public/layers.json');
 });

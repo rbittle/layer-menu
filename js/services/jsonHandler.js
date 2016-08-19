@@ -9,7 +9,8 @@ jsonHandler.$inject = [
 function jsonHandler($http){
     var service = {
         menu: generateMenu,
-        save: save
+        save: save,
+        deleteLayer: deleteLayer
     }
 
     return service;
@@ -18,7 +19,6 @@ function jsonHandler($http){
 
     function generateMenu(){
         return $http({url:'menuJson/', method:'GET'}).then(function(response){
-            console.log(response);
             return response.data;
         }, function(response){
             console.log(response);
@@ -30,8 +30,23 @@ function jsonHandler($http){
             success = function(){};
         if(typeof failure === 'undefined')
             failure = function(){};
-        console.log(data);
-        var script = 'menuJson/'
+        var script = 'menuJson/';
+
+        $http.post(script, data)
+            .then(function(res){
+                success(res);   
+            },function(res){
+                failure(res);
+            });
+    }
+
+    function deleteLayer(data, success, failure){
+        if(typeof success === 'undefined')
+            success = function(){};
+        if(typeof failure === 'undefined')
+            failure = function(){};
+
+        var script = 'delete/';
 
         $http.post(script, data)
             .then(function(res){

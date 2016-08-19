@@ -26,22 +26,31 @@ function editController($scope, jsonHandler, dragulaService, Upload, $timeout){
         });
         uploadPost.then(function(resp){
             if(vm.json.layers == []||typeof vm.json.layers === 'undefined'){
-                vm.json.layers = [{name:vm.name, image: 'images/'+file.name}]
+                vm.json.layers = [{name:vm.name, image: file.name}]
             }else{
-                vm.json.layers.push({name:vm.name, image: 'images/'+file.name});
+                vm.json.layers.push({name:vm.name, image: file.name});
             }
+            vm.save(false);
         },function(resp){
         
         });
         
     }
     
-    vm.delete = function(item){
+    vm.deleteLayer = function(item){
         var index = vm.json.layers.indexOf(item);
-        vm.json.layers.splice(index, 1);
+        var delLayer = vm.json.layers.splice(index, 1)[0];
+        jsonHandler.deleteLayer({fileName: delLayer.image}, function(){
+            vm.save();
+        }, function(res){
+            console.log(res)
+        });
     }
 
-    vm.save = function(){
+    vm.save = function(emit){
+        if(typeof emit === 'undefined')
+            emit = true;
+
         var data = {
             layers: vm.json.layers,
             marquee: vm.json.marquee,
@@ -49,19 +58,26 @@ function editController($scope, jsonHandler, dragulaService, Upload, $timeout){
             time: vm.json.time
         }
         jsonHandler.save(data, function(res){
-            console.log('save success');
             vm.saved = true;
             $timeout(function(){vm.saved=false;},1000);
         }, function(res){
             console.log('save failure');
+            console.log(res);
         });
-        socket.emit('menuSend', vm.json);
+        if(emit){
+            socket.emit('menuSend', vm.json);
+        }
     }
 
     $scope.$on('$viewContentLoaded', function(){
         jsonHandler.menu().then(function(data){
             vm.json = data;
         });
+    });
+
+    socket.on('menuRecieve', function(data){
+        vm.json = data;
+        $scope.$apply();
     });
 }
 

@@ -4,12 +4,12 @@
         <div dragula="'layers'" dragula-model="ec.json.layers">
             <div class="layerObj" ng-repeat="layer in ec.json.layers">
                 <div class="preview">
-                    <img ng-src="{{layer.image}}" width="60" />
+                    <img ng-src="{{'images/' + layer.image}}" width="60" />
                 </div>
                 <div class="details">
                     {{layer.name}}
                 </div>
-                <div class="delete" ng-click="ec.delete(layer)"></div>
+                <div class="delete" ng-click="ec.deleteLayer(layer)"></div>
             </div>
         </div>
     </div>
